@@ -109,9 +109,15 @@ namespace TowerNS
 						t = -2;
 					if (h->GetT() == 3)
 						t = -3;
+					if (h->GetT() == -10)
+						t = -10;
 				}
 				else
 					t = rd.GetType(g);
+				if (t == -10) {
+					SetColor(6);
+					s << 'D';
+				}
 				if (t == -1) {
 					SetColor(5);
 					s << 'R';
@@ -193,9 +199,9 @@ namespace TowerNS
 			return -1;
 		int EnHP = en->GetDmg(Tabl[LVL].Dam);
 		if (EnHP <= 0) {
+			Map[g.x][g.y].SetType(-10);
 			Map[g.x][g.y].SetEnemy(nullptr);
 			en->Die();
-			delete en;
 			return 0;
 		}
 		else
